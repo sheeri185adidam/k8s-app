@@ -1,0 +1,60 @@
+# todoapi
+apiVersion: v1
+kind: Service
+metadata:
+  name: todoapi
+spec:
+  ports:
+    - port: 7737
+      targetPort: 7737
+  selector:
+    app: todoapi
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todoapi
+spec:
+  selector:
+    matchLabels:
+      app: todoapi
+  template:
+    metadata:
+      labels:
+        app: todoapi
+    spec:
+      containers:
+        - name: todoapi
+          image: sheeri185adidam/todoapi:1.0
+
+# rngapi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rngapi
+spec:
+  ports:
+    - port: 7733
+      targetPort: 7733
+  selector:
+    app: rngapi
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rngapi
+spec:
+  selector:
+    matchLabels:
+      app: rngapi
+  template:
+    metadata:
+      labels:
+        app: rngapi
+    spec:
+      containers:
+        - name: rngapi
+          image: sheeri185adidam/rngapi:1.0      
